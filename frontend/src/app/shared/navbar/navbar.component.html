@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/">Online Learning Platform</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/courses">Courses</a>
+          </li>
+          <li class="nav-item" *ngIf="authService.currentUserValue && authService.isAdmin()">
+            <a class="nav-link" routerLink="/admin">Admin</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="!authService.currentUserValue">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/auth/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/auth/register">Register</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="authService.currentUserValue">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+              {{ authService.currentUserValue.firstName }} {{ authService.currentUserValue.lastName }}
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item" routerLink="/profile">Profile</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" (click)="logout()">Logout</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
